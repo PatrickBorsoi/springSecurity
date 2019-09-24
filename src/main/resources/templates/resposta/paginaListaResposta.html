@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmls="http://www.h3.org/1999/xhtml"
+	xmlns:th="http:www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="panel-default">
+			<div class="text-center">
+				<h1 class="h4 text-gray-900 mb-4">Listagem de Respostas</h1>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table
+						class="table table-sm table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Resposta </th>
+								<th></th>
+							</tr>
+							 
+							<tbody>
+								<tr th:each="resposta : ${respostas}">
+								<td th:text="${resposta.id}"></td>
+								<td th:text="${resposta.respostaTexto}"></td>
+							<td>
+								<div class="btn-group pull-right">
+									<a class="btn btn-sm btn-primary" th:href="@{/resposta/alterar/{id}(id=${resposta.id})}">ALTERAR</a>
+									<a class="btn btn-sm btn-danger" th:href="@{/resposta/excluir/{id}(id=${resposta.id})}">EXCLUIR</a>
+								</div>
+							</td>
+							</tr>
+							</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<a class="btn btn-sm btn-success" th:href="@{/resposta/cadastrar}"> Cadastrar Novo Resposta</a>
+	</div>
+</body>
+</html>
