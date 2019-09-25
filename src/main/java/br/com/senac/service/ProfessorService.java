@@ -34,6 +34,7 @@ public class ProfessorService {
 		Professor prof = buscaPorId(profAlterado.getId());
 		prof.setId(profAlterado.getId());
 		prof.setNome(profAlterado.getNome());
+		prof.setMateriaList(profAlterado.getMateriaList());
 		return salvar(prof);
 	}
 	

@@ -26,6 +26,13 @@
 								autofocus="autofocus" placeholder="Informe o Nome"
 								maxlength="50" />
 						</div>
+						<div class="form-group">
+							<label>Materias</label>
+							<div th:each="materia : ${materias}">
+								<input type="checkbox" th:field="*{materiaList}" th:value="${materia.id}" />
+								<label th:for="${('materias')}" th:text="${materia.nome}"></label>
+							</div>
+						</div>
 					</fieldset>
 				</div>
 				<div align="center">

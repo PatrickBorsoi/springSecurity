@@ -12,44 +12,29 @@
 <body>
 	<div class="container">
 		<div class="panel-heading" align="center">
-			<strong>Alteração Professor</strong>
+			<strong>CADASTRO DE MATERIA</strong>
 		</div>
 
 		<div class="panel-body border">
-			<form class="form-horizontal" th:object="${professor}"
-				th:action="@{/professor/alterar}" method="POST" style="margin: 10px">
-				<div class=form-group>
+			<form class="form-horizontal" th:object="${materia}"
+				th:action="@{/materia/salvar}" method="POST" style="margin: 10px">
+				<div class="form-group">
 					<fieldset>
-						<div class="form-group row">
-							<label> ID </label> <input type="text"
-								class="form-control input-sm" id="id" th:field="*{id}"
-								readonly="readonly" />
-						</div>
-						<div class="form-group row">
-							<label> Nome </label> <input type="text"
+						<div class="form-group rouw">
+							<label>NOME </label> <input type="text"
 								class="form-control input-sm" th:field="*{nome}"
-								autofocus="autofocus" placeholder="Informe o nome"
+								autofocus="autofocus" placeholder="Informe o Nome"
 								maxlength="50" />
-						</div>
-						<div class="form-group">
-							<label>Materias</label>
-							<div th:each="materia : ${materias}">
-								<input type="checkbox" th:field="*{materiaList}" th:value="${materia.id}" />
-								<label th:for="${('materias')}" th:text="${materia.nome}"></label>
-							</div>
 						</div>
 					</fieldset>
 				</div>
-
 				<div align="center">
 					<button type="submit" class="btn btn-sm btn-success">SALVAR</button>
-					<a th:href="@{/professor/listarProfessores}"
-						class="btn btn-sm btn-default">CANCELAR</a>
+					<a th:href="@{/materia/listarMaterias}" class="btn btn-sm btn-default">CANCELAR</a>
 				</div>
-
 			</form>
 		</div>
-
 	</div>
+
 </body>
 </html>

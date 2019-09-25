@@ -1,5 +1,6 @@
 package br.com.senac.controller;
 
+import br.com.senac.service.MateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,9 @@ public class ProfessorController {
 	@Autowired
 	ProfessorService professorService;
 
+	@Autowired
+	MateriaService materiaService;
+
 	@GetMapping("/listarProfessores")
 	public ModelAndView listaProfessores() {
 		ModelAndView mv = new ModelAndView("professor/paginaListaProfessor");
@@ -29,6 +33,7 @@ public class ProfessorController {
 	@GetMapping("/cadastrar")
 	public ModelAndView cadastrarProfessor() {
 		ModelAndView mv = new ModelAndView("professor/cadastraProfessor");
+		mv.addObject("materias", materiaService.buscarTodosMaterias());
 		mv.addObject("professor", new Professor());
 		return mv;
 	}
@@ -42,6 +47,7 @@ public class ProfessorController {
 	@GetMapping("/alterar/{id}")
 	public ModelAndView alterarProf(@PathVariable("id") Integer id) throws ObjectNotFoundException {
 		ModelAndView mv = new ModelAndView("professor/alteraProfessor");
+		mv.addObject("materias", materiaService.buscarTodosMaterias());
 		mv.addObject("professor", professorService.buscaPorId(id));
 		return mv;
 	}

@@ -3,7 +3,7 @@
 	xmlns:th="http:www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Listagem</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
@@ -13,7 +13,7 @@
 	<div class="container">
 		<div class="panel-default">
 			<div class="text-center">
-				<h1 class="h4 text-gray-900 mb-4">Listagem de Professores</h1>
+				<h1 class="h4 text-gray-900 mb-4">Listagem de Materias</h1>
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">
@@ -23,19 +23,17 @@
 							<tr>
 								<th>ID</th>
 								<th>Nome </th>
-								<th>Materias </th>
 								<th></th>
 							</tr>
-							 
+							
 							<tbody>
-								<tr th:each="professor : ${professores}">
-								<td th:text="${professor.id}"></td>
-								<td th:text="${professor.nome}"></td>
-								<td> <span th:each=" materiaEach : ${professor.materiaList}" th:text="${'' + materiaEach.nome + ' | '}"> </span> </td>
+								<tr th:each="materia : ${materias}">
+								<td th:text="${materia.id}"></td>
+								<td th:text="${materia.nome}"></td>
 							<td>
 								<div class="btn-group pull-right">
-									<a class="btn btn-sm btn-primary" th:href="@{/professor/alterar/{idProf}(idProf=${professor.id})}">ALTERAR</a>
-									<a class="btn btn-sm btn-danger" th:href="@{/professor/excluir/{idProf}(idProf=${professor.id})}">EXCLUIR</a>
+									<a class="btn btn-sm btn-primary" th:href="@{/materia/alterar/{idMateria}(idMateria=${materia.id})}">ALTERAR</a>
+									<a class="btn btn-sm btn-danger" th:href="@{/materia/excluir/{idMateria}(idMateria=${materia.id})}">EXCLUIR</a>
 								</div>
 							</td>
 							</tr>
@@ -44,7 +42,7 @@
 				</div>
 			</div>
 		</div>
-		<a class="btn btn-sm btn-success" th:href="@{/professor/cadastrar}"> Cadastrar Novo Professor</a>
+		<a class="btn btn-sm btn-success" th:href="@{/materia/cadastrar}"> Cadastrar Nova Materia</a>
 	</div>
 </body>
 </html>

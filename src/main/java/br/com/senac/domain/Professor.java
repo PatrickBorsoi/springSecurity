@@ -1,11 +1,9 @@
 package br.com.senac.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Professor implements Serializable{
@@ -18,6 +16,14 @@ public class Professor implements Serializable{
 	
 	private String nome;
 
+	@ManyToMany
+	@JoinTable(
+			name ="professor_materia",
+			joinColumns = { @JoinColumn(name = "professor_id") },
+			inverseJoinColumns = { @JoinColumn(name = "materia_id") }
+	)
+	private List<Materia> materiaList;
+
 	public Integer getId() {
 		return id;
 	}
@@ -29,6 +35,13 @@ public class Professor implements Serializable{
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
-	
+	}
+
+	public List<Materia> getMateriaList() {
+		return materiaList;
+	}
+
+	public void setMateriaList(List<Materia> materiaList) {
+		this.materiaList = materiaList;
+	}
 }
