@@ -25,11 +25,25 @@
 								class="form-control input-sm" id="id" th:field="*{id}"
 								readonly="readonly" />
 						</div>
+						<div class="form-group">
+							<label>Pergunta</label>
+							<select class="form-control" th:field="*{pergunta}">
+								<option value="">Selecione a pergunta</option>
+								<option th:each="pergunta : ${perguntas}" th:value="${pergunta.id}" th:text="${pergunta.descricao}"></option>
+							</select>
+						</div>
 						<div class="form-group row">
 							<label> RESPOSTA </label> <input type="text"
 								class="form-control input-sm" th:field="*{respostaTexto}"
 								autofocus="autofocus" placeholder="Informe a Resposta"
 								maxlength="50" />
+						</div>
+						<div class="form-group">
+							<label>Professor</label>
+							<select class="form-control" th:field="*{professor}">
+								<option value="">Selecione o professor</option>
+								<option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}"></option>
+							</select>
 						</div>
 					</fieldset>
 				</div>

@@ -1,6 +1,7 @@
 package br.com.senac.controller;
 
 import br.com.senac.domain.Pergunta;
+import br.com.senac.service.AlunoService;
 import br.com.senac.service.PerguntaService;
 import br.com.senac.service.RespostaService;
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -22,6 +23,9 @@ public class PerguntaController {
     @Autowired
     private RespostaService respostaService;
 
+    @Autowired
+    private AlunoService alunoService;
+
     @GetMapping("/listarPerguntas")
     public ModelAndView listaPerguntas() {
         ModelAndView mv = new ModelAndView("pergunta/paginaListaPergunta");
@@ -34,6 +38,7 @@ public class PerguntaController {
         ModelAndView mv = new ModelAndView("pergunta/cadastraPergunta");
         mv.addObject("pergunta", new Pergunta());
         mv.addObject("respostas", respostaService.buscarTodosRespostas());
+        mv.addObject("alunos", alunoService.buscarTodosAlunos());
         return mv;
     }
 
@@ -48,6 +53,7 @@ public class PerguntaController {
         ModelAndView mv = new ModelAndView("pergunta/alteraPergunta");
         mv.addObject("pergunta", perguntaService.buscaPorId(id));
         mv.addObject("respostas", respostaService.buscarTodosRespostas());
+        mv.addObject("alunos", alunoService.buscarTodosAlunos());
         return mv;
     }
 

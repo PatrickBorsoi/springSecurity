@@ -33,6 +33,7 @@ public class AlunoService {
 		Aluno aluno = buscaPorId(alunoAlterado.getId());
 		aluno.setId(alunoAlterado.getId());
 		aluno.setNome(alunoAlterado.getNome());
+		aluno.setProfessor(alunoAlterado.getProfessor());
 		return salvar(aluno);
 	}
 	

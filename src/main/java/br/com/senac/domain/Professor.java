@@ -16,6 +16,11 @@ public class Professor implements Serializable{
 	
 	private String nome;
 
+	@OneToMany(
+			mappedBy = "professor"
+	)
+	private List<Resposta> respostas;
+
 	@ManyToMany
 	@JoinTable(
 			name ="professor_materia",
@@ -23,6 +28,11 @@ public class Professor implements Serializable{
 			inverseJoinColumns = { @JoinColumn(name = "materia_id") }
 	)
 	private List<Materia> materiaList;
+
+	@OneToMany(
+		mappedBy = "professor"
+	)
+	private List<Aluno> alunos;
 
 	public Integer getId() {
 		return id;
@@ -37,11 +47,27 @@ public class Professor implements Serializable{
 		this.nome = nome;
 	}
 
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
 	public List<Materia> getMateriaList() {
 		return materiaList;
 	}
 
 	public void setMateriaList(List<Materia> materiaList) {
 		this.materiaList = materiaList;
+	}
+
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
 	}
 }

@@ -1,12 +1,9 @@
 package br.com.senac.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Aluno implements Serializable{
@@ -16,7 +13,16 @@ public class Aluno implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "professor_id")
+	private Professor professor;
+
+	@OneToMany(
+			mappedBy = "aluno"
+	)
+	private List<Pergunta> perguntas;
+
 	@Column(name="nomeAluno")
 	private String nome;			
 	
@@ -31,5 +37,13 @@ public class Aluno implements Serializable{
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
 }

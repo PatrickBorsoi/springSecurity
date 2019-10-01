@@ -1,6 +1,8 @@
 package br.com.senac.controller;
 
 import br.com.senac.domain.Resposta;
+import br.com.senac.service.PerguntaService;
+import br.com.senac.service.ProfessorService;
 import br.com.senac.service.RespostaService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,12 @@ public class RespostaController {
     @Autowired
     private RespostaService respostaService;
 
+    @Autowired
+    private ProfessorService professorService;
+
+    @Autowired
+    private PerguntaService perguntaService;
+
     @GetMapping("/listarRespostas")
     public ModelAndView listaRespostas() {
         ModelAndView mv = new ModelAndView("resposta/paginaListaResposta");
@@ -29,6 +37,8 @@ public class RespostaController {
     public ModelAndView cadastrarResposta() {
         ModelAndView mv = new ModelAndView("resposta/cadastraResposta");
         mv.addObject("resposta", new Resposta());
+        mv.addObject("perguntas", perguntaService.buscarTodosPerguntas());
+        mv.addObject("professores", professorService.buscarTodosProfessores());
         return mv;
     }
 
@@ -42,6 +52,8 @@ public class RespostaController {
     public ModelAndView alterarProf(@PathVariable("id") Integer id) throws ObjectNotFoundException {
         ModelAndView mv = new ModelAndView("resposta/alteraResposta");
         mv.addObject("resposta", respostaService.buscaPorId(id));
+        mv.addObject("perguntas", perguntaService.buscarTodosPerguntas());
+        mv.addObject("professores", professorService.buscarTodosProfessores());
         return mv;
     }
 

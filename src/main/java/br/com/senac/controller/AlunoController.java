@@ -2,6 +2,7 @@ package br.com.senac.controller;
 
 import javax.annotation.Generated;
 
+import br.com.senac.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,10 @@ public class AlunoController {
 	
 	@Autowired
 	private AlunoService alunoService;
-	
+
+	@Autowired
+	private ProfessorService professorService;
+
 	@GetMapping("/listarAlunos")
 	public ModelAndView listaTodosAluno() {
 		ModelAndView mv = new ModelAndView("aluno/paginaListaAlunos");
@@ -32,7 +36,8 @@ public class AlunoController {
 	public ModelAndView cadastrarAluno() {
 		ModelAndView mv = new ModelAndView("aluno/cadastraAluno");
 		mv.addObject("aluno", new Aluno());
-		return mv;		
+		mv.addObject("professores", professorService.buscarTodosProfessores());
+		return mv;
 	}
 	
 	@PostMapping("/salvar")
@@ -45,6 +50,7 @@ public class AlunoController {
 	public ModelAndView alterarAluno(@PathVariable("id") Integer idAluno) throws ObjectNotFoundException {
 		ModelAndView mv = new ModelAndView("aluno/alteraAluno");
 		mv.addObject("aluno", alunoService.buscaPorId(idAluno));
+		mv.addObject("professores", professorService.buscarTodosProfessores());
 		return mv;
 	}
 	

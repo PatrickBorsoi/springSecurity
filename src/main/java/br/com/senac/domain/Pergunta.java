@@ -15,6 +15,10 @@ public class Pergunta {
     @JoinColumn(name = "resposta_id")
     private Resposta resposta;
 
+    @ManyToOne
+    @JoinColumn(name = "aluno_id")
+    private Aluno aluno;
+
     public Integer getId() {
         return id;
     }
@@ -33,5 +37,14 @@ public class Pergunta {
     public void setResposta(Resposta resposta) {
         this.resposta = resposta;
     }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
 
 }

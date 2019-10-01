@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class PerguntaService {
+
     @Autowired
     PerguntaRepository perguntaRepository;
 
@@ -19,6 +20,9 @@ public class PerguntaService {
     }
 
     public Pergunta salvar(Pergunta pergunta) {
+        if(pergunta.getResposta() != null){
+            pergunta.getResposta().setPergunta(pergunta);
+        }
         return perguntaRepository.save(pergunta);
     }
 
@@ -32,10 +36,16 @@ public class PerguntaService {
         pergunta.setId(perguntaAlterado.getId());
         pergunta.setDescricao(perguntaAlterado.getDescricao());
         pergunta.setResposta(perguntaAlterado.getResposta());
+        pergunta.setAluno(perguntaAlterado.getAluno());
+        if(pergunta.getResposta() != null){
+            pergunta.getResposta().setPergunta(pergunta);
+        }
+
         return salvar(pergunta);
     }
 
     public void excluir(Integer id) {
         perguntaRepository.deleteById(id);
     }
+
 }

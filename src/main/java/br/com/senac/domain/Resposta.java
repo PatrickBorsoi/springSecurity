@@ -1,9 +1,6 @@
 package br.com.senac.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -12,6 +9,15 @@ public class Resposta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
+    @OneToOne(
+            mappedBy = "resposta"
+    )
+    private Pergunta pergunta;
 
     private String respostaTexto;
 
@@ -28,5 +34,21 @@ public class Resposta implements Serializable {
 
     public void setRespostaTexto(String respostaTexto) {
         this.respostaTexto = respostaTexto;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public Pergunta getPergunta() {
+        return pergunta;
+    }
+
+    public void setPergunta(Pergunta pergunta) {
+        this.pergunta = pergunta;
     }
 }

@@ -22,17 +22,20 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		Aluno aluno1 = new Aluno();
-		aluno1.setNome("Lucas");
-		alunoService.salvar(aluno1);
-		
-		Aluno aluno2 = new Aluno();
-		aluno2.setNome("Bruno");
-		alunoService.salvar(aluno2);
-		
 		Professor prof1 =  new Professor();
 		prof1.setNome("Saramargo");
-		professorService.salvar(prof1);		
-		
+		professorService.salvar(prof1);
+
+		Aluno aluno1 = new Aluno();
+		aluno1.setNome("Lucas");
+		aluno1.setProfessor(prof1);
+		alunoService.salvar(aluno1);
+
+		Aluno aluno2 = new Aluno();
+		aluno2.setNome("Bruno");
+		aluno2.setProfessor(prof1);
+		alunoService.salvar(aluno2);
+
+
 	}
 }
