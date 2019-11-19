@@ -1,8 +1,11 @@
 package br.com.senac.initializer;
 
+import br.com.senac.domain.Usuario;
+import br.com.senac.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import br.com.senac.domain.Aluno;
@@ -18,6 +21,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
 	ProfessorService professorService;
+
+	@Autowired
+	UsuarioRepository usuarioRepository;
 	
 	
 	@Override
@@ -35,6 +41,14 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		aluno2.setNome("Bruno");
 		aluno2.setProfessor(prof1);
 		alunoService.salvar(aluno2);
+
+
+		Usuario usuario = new Usuario();
+		usuario.setLogin("admin");
+		usuario.setNomeCompleto("Admin");
+		usuario.setSenha(new BCryptPasswordEncoder().encode("123"));
+		usuarioRepository.save(usuario);
+
 
 
 	}
